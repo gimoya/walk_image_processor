@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.build/
+.dist/
+venv/
+.env/
+.env*/
+ENV/
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# QGIS / data artifacts (speculative)
+*.aux.xml
+*.lock
+
+# PDFs/build output
+examplefiles/done.pdf
+
