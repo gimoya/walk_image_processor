@@ -25,11 +25,11 @@ wip -T scientific -t "Forschungswanderung" -l "Nationalpark" -o "bericht.md"
 # Compression with custom settings
 wip -c -m 1.5 -q 95 -t "Qualitätswanderung"
 
-# PDF conversion workflow
+# Browser print workflow
 wip -t "Meine Wanderung" -l "Alpen"
 # ... edit the markdown file ...
 # ... preview formatting by opening walk_documentation.html in browser ...
-wip -p -i "walk_documentation.md"
+# ... use browser Print (Ctrl+P) → Save as PDF ...
 ```
 
 ### Command Line Options
@@ -41,8 +41,7 @@ wip -p -i "walk_documentation.md"
 - `-c, --compress`: Enable image compression
 - `-m, --max-size`: Maximum image size in MB
 - `-q, --quality`: JPEG quality (1-100)
-- `-p, --pdf`: Convert markdown to PDF
-- `-i, --input`: Input file for PDF conversion
+- `--dry-run`: Test run without creating files
 
 ## **How Max Size Works:**
 
@@ -85,11 +84,18 @@ wip -c -m 1.5
 1. **Generate**: `wip` creates both `.md` and `.html` files
 2. **Edit**: Manually edit the `.md` file (text, structure, etc.)
 3. **Preview**: Open `.html` file in browser to check formatting
-4. **Convert**: `wip -p` regenerates HTML from edited markdown, then creates PDF
+4. **Print**: Use browser's Print function (Ctrl+P) to save as PDF
 
 ### **Files Created:**
 - `walk_documentation.md` - For manual editing
-- `walk_documentation.html` - For previewing formatting
-- `walk_documentation.pdf` - Final output (after `wip -p`)
+- `walk_documentation.html` - For previewing and printing
+- `walk_documentation.pdf` - Generated via browser Print → Save as PDF
+
+### **Print Instructions:**
+1. Open `walk_documentation.html` in your browser
+2. Press `Ctrl+P` (or Cmd+P on Mac)
+3. Choose "Save as PDF" as destination
+4. Set margins to "Minimum" or "None" for best results
+5. Click "Save"
 
 **Key Point**: The `-m` flag only works when combined with `-c` (compress). It's the target size for compression, not a file size limit.

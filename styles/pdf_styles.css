@@ -113,3 +113,66 @@ strong {
     height: 0;
     overflow: hidden;
 }
+
+/* Print-specific styles for browser printing */
+@media print {
+    body {
+        margin: 0;
+        padding: 15mm;
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #000;
+        background: white;
+    }
+    
+    h1 {
+        page-break-before: always;
+        break-before: page;
+        margin-top: 0;
+    }
+    
+    h1:first-child {
+        page-break-before: avoid;
+        break-before: avoid;
+    }
+    
+    h2 {
+        page-break-before: always;
+        break-before: page;
+        margin-top: 0;
+    }
+    
+    figure {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin: 10mm auto;
+    }
+    
+    .walk-image {
+        max-height: 180mm; /* Smaller for print margins */
+    }
+    
+    .walk-image.landscape {
+        max-height: 90mm; /* Allow 2 landscape per page */
+    }
+    
+    .walk-image.portrait {
+        max-height: 200mm; /* Single portrait per page */
+    }
+    
+    figcaption, em {
+        font-size: 10pt;
+        margin-top: 2mm;
+    }
+    
+    /* Hide any debug elements */
+    .debug, [data-debug] {
+        display: none !important;
+    }
+    
+    /* Ensure proper page margins */
+    @page {
+        margin: 15mm;
+        size: A4;
+    }
+}

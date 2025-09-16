@@ -650,12 +650,6 @@ def main():
     parser.add_argument('-T', '--template', default=None,
                        help='Custom template file path (default: uses built-in template)')
     
-    # PDF conversion mode
-    parser.add_argument('-p', '--pdf', action='store_true',
-                       help='Convert existing markdown file to PDF (instead of generating markdown)')
-    parser.add_argument('-i', '--input', default=None,
-                       help='Input markdown file for PDF conversion (must be .md file, default: uses -o value)')
-    
     args = parser.parse_args()
     
     # Handle help browser request FIRST
@@ -680,29 +674,6 @@ def main():
         except Exception:
             webbrowser.open("https://github.com/gimoya/walk_image_processor#readme")
             print("README opened on GitHub.")
-        return
-    
-    # PDF conversion mode SECOND - BEFORE any image processing
-    if args.pdf:
-        input_file = args.input if args.input else args.output
-        
-        # Validate input file extension for -i parameter
-        if args.input and not args.input.endswith('.md'):
-            print(f"ERROR: Input file '{args.input}' must be a markdown file (.md)")
-            print("The -i parameter only accepts markdown files, not HTML or other formats.")
-            return
-        
-        # For backward compatibility, still handle .html/.pdf extensions in output filename
-        if not input_file.endswith('.md'):
-            print(f"ERROR: Input file '{input_file}' must be a markdown file (.md)")
-            print("The -i parameter only accepts markdown files")
-            return
-        
-        if convert_markdown_to_pdf(input_file):
-            print(f"\nPDF generation completed successfully!")
-            print(f"Output: {input_file.replace('.md', '.pdf')}")
-        else:
-            print(f"\nPDF generation failed!")
         return
     
     # Copy CSS files to working directory for later use
@@ -846,7 +817,7 @@ def main():
             f.write(full_html)
         
         print(f"[OK] Successfully created {html_output}")
-        print(f"[INFO] HTML file ready for PDF conversion with: wip -p")
+        print(f"[INFO] Open {html_output} in browser and use Print (Ctrl+P) → Save as PDF")
             
     except Exception as e:
         print(f"ERROR writing file: {e}")
