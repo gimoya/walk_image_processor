@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Deckblatt – Technischer Berichtht Holzmeisterlifte</title>
+<style>
+    html, body { height: 100%; }
+    body {
+        font-family: aktivgrotesk, Arial, sans-serif;
+        margin: 0;
+        color: #222;
+    }
+    .page {
+        box-sizing: border-box;
+        width: 210mm; /* A4 portrait width */
+        height: 295mm; /* slightly less to avoid overflow to second page */
+        padding: 15mm 20mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden; /* prevent accidental second page */
+        page-break-after: always;
+    }
+    .header { width: 100%; }
+    .logo {
+        display: block;
+        height: 22mm;
+        width: auto;
+        margin-left: -10mm;
+    }
+    .title { 
+        margin-top: 50mm; 
+    }
+    .title .big { 
+        font-size: 22pt; 
+        font-weight: 700; 
+    }
+    .title .mid { 
+        margin-top: 4mm;
+        font-size: 16pt; 
+        font-weight: 600; 
+        margin-top: 2mm; 
+    }
+    .title .small { 
+        margin-top: 4mm;
+        font-size: 12pt; 
+    }
+    .contacts {
+        margin-top: 0;
+        font-size: 9pt;
+    }
+    .block { 
+        margin-bottom: 20mm;
+    }
+    .label { 
+        font-weight: 700; 
+        display: block; 
+        margin-bottom: 2mm; 
+    }
+    .meta { 
+        margin-top: 20mm;
+        font-size: 10pt; 
+        color: #666; 
+    }
+    @page { 
+        size: A4 landscape; 
+        margin: 10mm; 
+        numbering: arabic;
+    }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div>
+    <img class="logo" alt="Trailtech Logo" src="../images/LOGO.png">
+  </div>
+  <div class="contacts">
+  <div class="block">
+    Trailtech.at – Nicolas Ferris-Heath<br>
+    Klosterangergasse 3<br>
+    6020 Innsbruck<br>
+    Web: www.trailtech.at
+  </div>
+    <div class="block">
+      <span class="label">Auftraggeber:</span>
+      XXXX XX<br>
+      XXXX Straße XX<br>
+      XXXX Austria
+    </div>
+</div>
+  <div class="title">
+    <div class="big">00X / XXXXX</div>
+    <div class="mid">XXXXXX</div>
+    <div class="small">PROJEKT XXXXXX</div>
+  </div>
+  </div>
+  <div class="meta">Datum: XX.XX.XXXX</div>
+</div>
+</body>
+</html>

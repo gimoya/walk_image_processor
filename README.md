@@ -38,6 +38,7 @@ wip -t "Meine Wanderung" -l "Alpen"
 - `-d, --date`: Date (DD-MM-YYYY format)
 - `-o, --output`: Output markdown file
 - `-T, --template`: Template format or custom file
+- `--top-sheet`: Custom top sheet HTML file (default: htmlsheets/top_sheet.html)
 - `-c, --compress`: Enable image compression
 - `-m, --max-size`: Maximum image size in MB
 - `-q, --quality`: JPEG quality (1-100)

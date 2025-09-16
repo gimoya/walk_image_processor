@@ -52,6 +52,32 @@ def load_template(template_path: str = None) -> str:
     # Fallback to built-in template
     return get_builtin_template()
 
+def load_top_sheet(top_sheet_path: str = None) -> str:
+    """Load top sheet HTML from path or use default"""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    system_dir = os.path.dirname(script_dir)
+    
+    # If custom top sheet path provided
+    if top_sheet_path and os.path.isfile(top_sheet_path):
+        try:
+            with open(top_sheet_path, 'r', encoding='utf-8') as f:
+                return f.read()
+        except Exception as e:
+            print(f"ERROR loading custom top sheet: {e}")
+            print("Using default top sheet instead.")
+    
+    # Use default top sheet
+    default_path = os.path.join(system_dir, "htmlsheets", "top_sheet.html")
+    if os.path.exists(default_path):
+        try:
+            with open(default_path, 'r', encoding='utf-8') as f:
+                return f.read()
+        except Exception as e:
+            print(f"ERROR loading default top sheet: {e}")
+            return ""
+    
+    return ""
+
 def get_builtin_template() -> str:
     """Fallback built-in template"""
     return """# {title}
@@ -649,6 +675,8 @@ def main():
                        help='Open README in default viewer/browser')
     parser.add_argument('-T', '--template', default=None,
                        help='Custom template file path (default: uses built-in template)')
+    parser.add_argument('--top-sheet', default=None,
+                       help='Custom top sheet HTML file path (default: uses htmlsheets/top_sheet.html)')
     
     args = parser.parse_args()
     
@@ -800,7 +828,22 @@ def main():
         # Convert markdown to HTML
         html_content = convert_markdown_to_html(markdown_content)
         
-        # Create full HTML document with CSS link
+        # Load top sheet HTML
+        top_sheet_html = load_top_sheet(args.top_sheet)
+        
+        # Extract body content from top sheet if it's a complete HTML document
+        if top_sheet_html.strip().startswith('<!DOCTYPE') or top_sheet_html.strip().startswith('<html'):
+            # Extract content between <body> and </body> tags
+            import re
+            body_match = re.search(r'<body[^>]*>(.*?)</body>', top_sheet_html, re.DOTALL | re.IGNORECASE)
+            if body_match:
+                top_sheet_content = body_match.group(1).strip()
+            else:
+                top_sheet_content = top_sheet_html
+        else:
+            top_sheet_content = top_sheet_html
+        
+        # Create full HTML document with CSS link, top sheet, and running header
         full_html = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -809,7 +852,18 @@ def main():
     <link rel="stylesheet" href="print_styles.css">
 </head>
 <body>
+    <!-- Running header for print -->
+    <div class="running-header">
+        <img class="logo" alt="Logo" src="../images/logo.png">
+    </div>
+    
+    <!-- Top Sheet -->
+{top_sheet_content}
+    
+    <!-- Main Content -->
 {html_content}
+
+<script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
 </body>
 </html>"""
         

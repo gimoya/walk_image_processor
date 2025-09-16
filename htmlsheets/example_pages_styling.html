@@ -1,0 +1,105 @@
+<style>
+    body {
+        font-family: aktivgrotesk, sans-serif;
+        font-size: 12px;
+        line-height: 1.5;
+        color: #333;
+    }
+    /* Paged media footer via Paged.js */
+    @page {
+        margin: 20mm;
+        @top-right {
+            content: element(headerLogo);
+        }
+        @bottom-right {
+            content: "Seite " counter(page) " / " counter(pages);
+            font-size: 12px;
+            color: #666;
+        }
+    }
+    .running-header {
+        display: none;
+        text-align: right;
+    }
+    .running-header .logo { height: 12mm; }
+    .logo-top-right {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        height: 64px;
+        z-index: 1000;
+    }
+    .addressant {
+        margin-top: 70px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #333;
+    }
+    .addressant .label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: -10px;
+    }
+    .addressant-right {
+        text-align: right;
+    }
+    .header-logo {
+        width: 100%;
+        text-align: right;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .header-logo .logo { height: 64px; }
+    .contacts {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        column-gap: 20px;
+    }
+    .meta {
+        font-size: 12px;
+        color: #666;
+        margin-left: 20px;
+        margin-top: 10px;
+        text-align: right;
+    }
+    .dash-list { 
+        list-style: none; 
+        margin: 0; 
+        padding-left: 0; 
+        font-family: consolas, sans-serif;
+        font-style: italic;
+        font-size: 12px;
+        color: #666;
+
+
+    }
+    .dash-list li::before { 
+        content: "- "; 
+    }
+    .print-footer { 
+        display: none; 
+    }
+    @media print {
+        /* Use margin boxes instead; keep old footer off */
+        .print-footer { display: none !important; }
+        /* Neutralize absolute elements so they don't break pagination */
+        .logo-top-right {
+            position: static !important;
+            top: auto !important;
+            right: auto !important;
+            height: 32px;
+        }
+        /* Hide in-content header logo; use running header instead */
+        .header-logo { display: none !important; }
+        /* Capture running header element for margin box */
+        .running-header {
+            display: block;
+            position: running(headerLogo);
+        }
+    }
+</style>
+
+
+<div class="print-footer"><span class="page-number"></span></div>
+<script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
