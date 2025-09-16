@@ -1,0 +1,115 @@
+/* PDF Generation Styles for Walk Image Processor */
+
+body {
+    font-family: 'Open Sans', Arial, Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    color: #333;
+    font-size: 13pt;
+    text-align: justify;
+}
+
+h1 {
+    color: #2c3e50;
+    border-bottom: 3px solid #2c3e50;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    font-size: 20pt;
+}
+
+h2 {
+    color: #34495e;
+    margin-top: 30px;
+    font-size: 16pt;
+}
+
+h3 {
+    color: #34495e;
+    margin: 10px 0px 5px 0px;
+    font-size: 13pt;
+    font-style: italic;
+}
+
+/* Figure wrapper that contains both image and caption */
+figure {
+    max-width: 80%;                  /* Default max-width constraint */
+    margin: 25pt auto 40px auto;    /* Center horizontally with auto left/right */
+    text-align: center;
+    display: block;                  /* Block display for proper centering */
+    width: auto;                     /* Allow figure to size to content */
+    border: 1px solid #2c3e50;
+    border-radius: 4px;              /* Debug border to see centering */
+}
+
+/* Narrow/tall images (ratio < 0.6) get smaller max-width for better page fit */
+figure[data-ratio^="0.5"],
+figure[data-ratio^="0.4"],
+figure[data-ratio^="0.3"] {
+    max-width: 61%;
+}
+
+figure[data-ratio^="1.6"],
+figure[data-ratio^="1.7"],
+figure[data-ratio^="1.5"] {
+    max-width: 90%;
+}
+
+.walk-image {
+    width: 100%;                     /* Fill figure width completely */
+    max-height: 220mm;               /* Default for portrait images */
+    page-break-inside: avoid;        /* Prevent image splitting */
+    break-inside: avoid;             /* Modern CSS equivalent */
+    height: auto;                    /* Let height adjust to maintain ratio */
+    object-fit: contain;             /* Maintain aspect ratio within container */
+    margin: 0 auto;                  /* Center horizontally, no vertical margins */
+    display: block;                  /* Ensure block display for margin auto */
+    text-align: center;              /* Center any inline content */
+    border-radius: 4px 4px 0px 0px;
+}
+
+/* Smart scaling for landscape images - allow 2 per page */
+.walk-image[style*="landscape"],
+.walk-image.landscape {
+    max-height: 110mm;              /* Landscape: allows 2 per page */
+}
+
+/* Smart scaling for portrait images - single per page */
+.walk-image[style*="portrait"],
+.walk-image.portrait {
+    max-height: 230mm;              /* Portrait: single per page */
+}
+
+/* Caption styling - now inherits figure width */
+figcaption, em {
+    font-style: italic;
+    color: #34495e;
+    padding: 8px;
+    text-align: justify;
+    font-size: 11pt;
+    text-decoration: none;
+    border-radius: 0;
+    display: block;
+    line-height: 1.25;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid #1f1f1f;
+    margin: 30px 0;
+}
+
+strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Page break controls - multiple approaches for reliability */
+.page-break {
+    page-break-before: always !important;
+    break-before: page !important;
+    margin-top: 20px;
+    height: 0;
+    overflow: hidden;
+}
