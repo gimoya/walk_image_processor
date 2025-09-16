@@ -678,8 +678,8 @@ def main():
     
     # Copy CSS files to working directory for later use
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    pdf_css_source = os.path.join(script_dir, "..", "styles", "pdf_styles.css")
-    pdf_css_dest = "pdf_styles.css"
+    print_css_source = os.path.join(script_dir, "..", "styles", "print_styles.css")
+    print_css_dest = "print_styles.css"
     
     # Check for existing files and warn user BEFORE copying/processing
     existing_files = []
@@ -688,8 +688,8 @@ def main():
     html_output = args.output.replace('.md', '.html')
     if os.path.exists(html_output):
         existing_files.append(html_output)
-    if os.path.exists(pdf_css_dest):
-        existing_files.append(pdf_css_dest)
+    if os.path.exists(print_css_dest):
+        existing_files.append(print_css_dest)
     
     if existing_files:
         print("\n" + "=" * 60)
@@ -706,10 +706,10 @@ def main():
         print("=" * 60)
     
     # Now copy CSS files after user confirmation
-    if os.path.exists(pdf_css_source):
+    if os.path.exists(print_css_source):
         import shutil
-        shutil.copy2(pdf_css_source, pdf_css_dest)
-        print(f"[INFO] CSS file copied: {pdf_css_dest}")
+        shutil.copy2(print_css_source, print_css_dest)
+        print(f"[INFO] CSS file copied: {print_css_dest}")
     
     print("=" * 40)
     
@@ -806,7 +806,7 @@ def main():
 <head>
     <meta charset="utf-8">
     <title>Walk Documentation</title>
-    <link rel="stylesheet" href="pdf_styles.css">
+    <link rel="stylesheet" href="print_styles.css">
 </head>
 <body>
 {html_content}
