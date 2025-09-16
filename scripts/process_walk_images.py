@@ -646,7 +646,7 @@ def main():
     parser.add_argument('--dry-run', action='store_true',
                        help='Show what would be done without creating files')
     parser.add_argument('--help-browser', action='store_true',
-                       help='Open help documentation in browser')
+                       help='Open README in default viewer/browser')
     parser.add_argument('-T', '--template', default=None,
                        help='Custom template file path (default: uses built-in template)')
     
@@ -663,12 +663,23 @@ def main():
         import webbrowser
         script_dir = os.path.dirname(os.path.abspath(__file__))
         system_dir = os.path.dirname(script_dir)
-        help_file = os.path.join(system_dir, "docs", "help.html")
-        if os.path.exists(help_file):
-            webbrowser.open(f"file:///{help_file.replace(os.sep, '/')}")
-            print("Help documentation opened in browser")
-        else:
-            print("ERROR: Help file not found. Please reinstall the system.")
+        readme_file = os.path.join(system_dir, "README.md")
+        try:
+            if os.path.exists(readme_file):
+                # Open README locally using the platform default handler
+                if sys.platform.startswith('win') and hasattr(os, 'startfile'):
+                    os.startfile(readme_file)  # type: ignore[attr-defined]
+                elif sys.platform == 'darwin':
+                    subprocess.run(["open", readme_file], check=False)
+                else:
+                    subprocess.run(["xdg-open", readme_file], check=False)
+                print("README opened locally.")
+            else:
+                webbrowser.open("https://github.com/gimoya/walk_image_processor#readme")
+                print("README opened on GitHub.")
+        except Exception:
+            webbrowser.open("https://github.com/gimoya/walk_image_processor#readme")
+            print("README opened on GitHub.")
         return
     
     # PDF conversion mode SECOND - BEFORE any image processing
