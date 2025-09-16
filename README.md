@@ -28,6 +28,7 @@ wip -c -m 1.5 -q 95 -t "Qualitätswanderung"
 # PDF conversion workflow
 wip -t "Meine Wanderung" -l "Alpen"
 # ... edit the markdown file ...
+# ... preview formatting by opening walk_documentation.html in browser ...
 wip -p -i "walk_documentation.md"
 ```
 
@@ -77,5 +78,18 @@ wip -c -m 1.5
 # BACKUP created: image.jpg.backup
 # COMPRESSED image.jpg: 8.7MB → 1.4MB (84% reduction, auto-quality: 45)
 ```
+
+## **Complete Workflow:**
+
+### **Step-by-Step Process:**
+1. **Generate**: `wip` creates both `.md` and `.html` files
+2. **Edit**: Manually edit the `.md` file (text, structure, etc.)
+3. **Preview**: Open `.html` file in browser to check formatting
+4. **Convert**: `wip -p` regenerates HTML from edited markdown, then creates PDF
+
+### **Files Created:**
+- `walk_documentation.md` - For manual editing
+- `walk_documentation.html` - For previewing formatting
+- `walk_documentation.pdf` - Final output (after `wip -p`)
 
 **Key Point**: The `-m` flag only works when combined with `-c` (compress). It's the target size for compression, not a file size limit.
