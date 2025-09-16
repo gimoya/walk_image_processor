@@ -126,8 +126,8 @@ strong {
     }
     
     h1 {
-        page-break-before: always;
-        break-before: page;
+        page-break-before: avoid;
+        break-before: avoid;
         margin-top: 0;
     }
     
@@ -137,9 +137,15 @@ strong {
     }
     
     h2 {
+        page-break-before: avoid;
+        break-before: avoid;
+        margin-top: 0;
+    }
+    
+    /* Only add page break after "Schlussfolgerungen" section */
+    h2[data-content="Schlussfolgerungen"] {
         page-break-before: always;
         break-before: page;
-        margin-top: 0;
     }
     
     figure {
